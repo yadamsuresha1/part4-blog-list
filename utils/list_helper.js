@@ -33,7 +33,6 @@ const mostBlogs = (blogs) => {
   const author = Object.keys(authors).find(
     (author) => authors[author] === mostNumberOfBlogs
   );
-  console.log(author);
   return {
     author: author,
     blogs: mostNumberOfBlogs,
@@ -53,7 +52,6 @@ const mostLikes = (blogs) => {
   const author = Object.keys(authors).find(
     (author) => authors[author] === mostLikes
   );
-  console.log(author);
   return {
     author: author,
     likes: mostLikes,
