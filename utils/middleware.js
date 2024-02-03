@@ -1,4 +1,3 @@
-const User = require("../models/user");
 const logger = require("./logger");
 const jwt = require("jsonwebtoken");
 const errorHandler = (error, req, res, next) => {
@@ -9,6 +8,10 @@ const errorHandler = (error, req, res, next) => {
     return res.status(400).json({ error: error.message });
   } else if (error.name === "JsonWebTokenError") {
     return res.status(400).json({ error: error.message });
+  } else if (error.name === "TokenExpiredError") {
+    return res
+      .status(400)
+      .json({ error: "Pleaes login again to create the blog!" });
   }
   next(error);
 };

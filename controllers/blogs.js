@@ -66,20 +66,23 @@ blogsRouter.delete("/:id", async (req, res) => {
   }
 
   await Blog.findByIdAndDelete(req.params.id);
-  res.status(204).end();
+  res.status(204).send({ message: "Deleted successfully!" });
 });
 
 blogsRouter.put("/:id", async (req, res) => {
-  const { title, url, likes } = req.body;
+  const { title, url, likes, user } = req.body;
+  logger.info("body", req.body);
   const updatedBlog = await Blog.findByIdAndUpdate(
     req.params.id,
     {
       title,
       url,
       likes,
+      user,
     },
     { new: true, runValidators: true, context: "query" }
-  );
+  ).populate("user");
+
   res.json(updatedBlog);
 });
 module.exports = blogsRouter;
